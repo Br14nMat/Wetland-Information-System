@@ -9,11 +9,21 @@ public class Main {
 	 * sc is an object of the scanner class for reading input.
 	 */
 	
-	static Scanner sc = new Scanner(System.in);
+	private Scanner sc = new Scanner(System.in);
 
-    static WetlandInformationSystem system = new WetlandInformationSystem();
+    private WetlandInformationSystem system = new WetlandInformationSystem();
     
+	public Main() {
+
+		system = new WetlandInformationSystem();
+
+		sc = new Scanner(System.in);
+
+	}
+
     public static void main(String[] args) {
+
+		Main main = new Main();
 
         String message = "";
 		
@@ -28,7 +38,7 @@ public class Main {
 		//7. showWetlandInfo();
 		//8. showWetlandMoreAnimals();
 		
-		system.addWetland(null, false, false, false, 0, null, null);
+		/* system.addWetland(null, false, false, false, 0, null, null);
 		
 		system.addNewSpecies(null, null, null, null, false);
 		
@@ -42,18 +52,14 @@ public class Main {
 		
 		system.showWetlandInfo();
 		
-		system.showWetlandMoreAnimals();
+		system.showWetlandMoreAnimals(); */
 		
 		
 		do {
 			
-			printMainMenu();
+			main.printMainMenu();
 			
-			option = sc.nextInt();
-			
-			sc.nextLine();
-			
-			executeMainOption(option);
+			main.executeMainOption(option);
 			
 			System.out.println(message);
 			
@@ -67,7 +73,7 @@ public class Main {
      * This method prints the main menu.
      */
 
-    public static void printMainMenu() {
+    public void printMainMenu() {
 	
 		System.out.println("1) Add a new wetland.\n" 
                         + "2) Add a new species. \n" 
@@ -82,7 +88,7 @@ public class Main {
 	}
 	
 	
-	public static void executeMainOption(int option) {
+	public void executeMainOption(int option) {
 		
 		switch (option) {
             case 1:
