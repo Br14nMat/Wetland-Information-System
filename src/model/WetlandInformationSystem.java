@@ -1,149 +1,217 @@
 package model;
 
-import java.util.Scanner;
-
 /**
- * This is the main class of the Wetland Information System.
- * @author Br14n
+ * This class represents the information system.
  */
 
-public class WetlandInformationSystem{
-	
-	/**
-	 * sc is an object of the scanner class for reading input.
-	 */
-	
-	static Scanner sc = new Scanner(System.in);
-	
-	/**
-	 * This array contains the objects of the Wetland class.
-	 */
-	
-	private static Wetland [] wetlands;
-		
-	
-	/**
-	 * This method adds a Wetland class object to the array containing the wetlands.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
-	 * <b>pos:</b> Wetland class object is added to the wetlands array.<br>
-	 * @param wetland Wetland, Wetland class object.<br>
-	 */
-	
-	public void addWetland(String name, boolean isInUrbanArea, boolean isPublic, boolean isProtected, double km2, String townName, String neighbourhoodName){
-		
-		//do something
-		
-	}
-	
-	/**
-	 * This method finds a Wetland class object in the array containing the wetlands.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
-	 * @param wetland Wetland, The wetland name to search for.<br>
-	 * @return msg String, The Wetland class object found or null.
-	 */
-	
-	
-	public Wetland findWetland(String wetlandName){
-		
-		//find wetland
-		
-		return null;
-		
-	}
-	
-	/**
-	 * This method adds a new species to the wetland.<br>
-	 * <b>pre:</b> The findWetland method must be declared.<br>
-	 * @param wetlandName String, The wetland name.<br>
-	 * @param speciesName String, The new species name.<br>
-	 * @param scientificName String, The scientific name of the new species.<br>
-	 * @param type String, The new species type.<br>
-	 * @param isMigratory boolean, The new species is migratory.<br>
-	 */
-	
-	public void addNewSpecies(String wetlandName, String speciesName, String scientificName, String type, boolean isMigratory){
-				
-		//wetlandFound = findWetland(...);
-		
-		//wetlandFound.addSpecies(...);
-		
-	}
-	
-	/**
-	 * This method adds a new event to the wetland.<br>
-	 * <b>pre:</b> The findWetland method must be declared.<br>
-	 * @param wetlandName String, The wetland name.<br>
-	 * @param eventOrganizer String, The event organizer id.<br>
-	 * @param eventValue double, The event value.<br>
-	 * @param eventDescription String, The event description.<br>
-	 * @param eventType String, The event type.<br>
-	 */
-	
-	public void addEvent(String wetlandName, String eventId, String eventOrganizer, double eventValue, String eventDescription, String eventType){
-		
-		//do something
-		
-	}
-	
-	/**
-	 * This method returns the quantity of maintenance performed in a year.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
-	 * @param year int, The year entered by the user.<br>
-	 * @return maintenances int, The maintenance quantity in a year.
-	 */
-	
+public class WetlandInformationSystem {
 
-	public int maintenancesQuantityIn(int year){
+	/**
+	 * This array contains the wetlands of the information system.
+	 */
+	private Wetland wetlands[];
+
+	/**
+	 * This is the constructor of the WetlandInformationSystem class. It initializes the array to store 80 wetlands.
+	 */
+	public WetlandInformationSystem() {
 		
-		//do something
+		wetlands = new Wetland[80];
+	}
+
+	/**
+	 * This method adds a new wetland to the system.<br>
+	 * @param wetland Wetland, the wetland to be added.<br>
+	 * @return message String, message that informs the user if the wetland was added or not.<br>
+	 */
+	public String addWetland(Wetland wetland) {
 		
-		return 0;
+		boolean hasSpace = false;
+
+		for (int i = 0; i < wetlands.length && !hasSpace; i++) {
+			
+			if (wetlands[i] == null) {
+				
+				wetlands[i] = wetland;
+				
+				hasSpace = true;
+				
+			}
+		}
+
+		return hasSpace  
+				? "Wetland added" 
+				: "No space available";
+
+	}
+
+	/**
+	 * This method finds a wetland by its name.<br>
+	 * @param name String, the name of the wetland to be found.<br>
+	 * @return Wetland, the wetland found.<br>
+	 */
+	public Wetland findWetland(String name) {
 		
+		Wetland wetlandFound = null;
+		boolean stopFlag = false;
+
+		for(int i = 0; i < wetlands.length && !stopFlag; i++) {
+			
+			if(wetlands[i] != null && wetlands[i].getName().equals(name)) {			
+				wetlandFound = wetlands[i];
+				stopFlag = true;
+			}
+		}
+
+		return wetlandFound;
+
+	}
+
+	/**
+	 * This method finds the wetland and adds a species to it.<br>
+	 * @param wetlandName String, the name of the wetland to be found.<br>
+	 * @param species Species, the species to be added.<br>
+	 * @return message String, message that informs the user if the species was added or not.<br>
+	 */
+	public String addSpecies(String wetlandName, Species species) {
+		
+		String message;
+		Wetland wetland = findWetland(wetlandName);
+
+		message = wetland != null 
+				? wetland.addSpecies(species) 
+				: "Wetland not found";
+
+		return message;
+
+	}
+
+	/**
+	 * This method finds the wetland and adds a event to it.<br>
+	 * @param wetlandName String, the name of the wetland to be found.<br>
+	 * @param event Event, the event to be added.<br>
+	 * @return message String, message that informs the user if the event was added or not.<br>
+	 */
+	public String addEvent(String wetlandName, Event event) {
+		
+		String message;
+		Wetland wetland = findWetland(wetlandName);
+
+		message = wetland != null 
+				? wetland.addEvent(event) 
+				: "Wetland not found";
+
+		return message;
+
+	}
+
+	/**
+	 * This method concatenates the wetland name and the number of maintenances in a given year for each wetland. This information is returned in a text String.<br>
+	 * @param year int, the given year.<br>
+	 * @return information String, the String that contains the information.<br>
+	 */
+	public String maintenancesNumberIn(int year) {
+
+		String information = "";
+
+		for(int i = 0; i < wetlands.length; i++) {
+			
+			if(wetlands[i] != null) {
+				
+				information += wetlands[i].getName() + ": " + wetlands[i].maintenancesNumberIn(year) + "\n";
+			}
+		}
+
+		return information;
 	}
 	
 	/**
-	 * This method shows the wetland name with the least flora.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
+	 * This method calculates the lowest number of flora in the wetlands.<br>
+	 * @return name String, the name of the wetland with the lowest number of flora.<br>
 	 */
-	
-	public void showWetlandLeastFlora(){
+
+	public String showWetlandLeastFlora() {
 		
-		//do something
-		
+		String wetlandLeastFlora = "";
+		int lowerNumFlora = 99999;
+
+		for(int i = 0; i < wetlands.length; i++) {
+			
+			if(wetlands[i] != null && wetlands[i].calculateFloraSpecies() < lowerNumFlora) {
+				wetlandLeastFlora = wetlands[i].getName();
+				lowerNumFlora = wetlands[i].calculateFloraSpecies();
+			}
+		}
+
+		return wetlandLeastFlora;
+
 	}
-	
+
 	/**
-	 * This method shows the wetlands that have a specific species.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
-	 * @param speciesName String, The species name.<br>
+	 * This method concatenates the name of the wetlands that have a given species.<br>
+	 * @param speciesName String, the given species name.<br>
+	 * @return nameOfWetlands String, the name of the wetlands that have a given species.<br>
 	 */
+	public String wetlandsThatHave(String speciesName) {
+
+		String nameOfWetlands = "";
+
+		for(int i = 0; i < wetlands.length; i++) {
+			
+			if(wetlands[i] != null && wetlands[i].findSpecies(speciesName) != null)
+				nameOfWetlands += wetlands[i].getName() + "\n";
+			
+		}
+
+		if(nameOfWetlands.equals(""))
+			nameOfWetlands = "No wetlands have this species";
 	
-	public void showSpeciesInWetland(String speciesName){
-		
-		//do something
-		
+		return nameOfWetlands;
 	}
-	
+
 	/**
-	 * This method shows the information for all wetlands, including wetlands, including the total number of species by type.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
+	 * This method returns the information of the wetlands. This information includes the number of species by type.<br>
+	 * @return information String, the information of the wetlands.<br>
 	 */
-	
-	public void showWetlandInfo(){
+
+	public String showWetlandsInfo() {
 		
-		//do something
-		
+		String information = "";
+
+		for(int i = 0; i < wetlands.length; i++) {
+			
+			if(wetlands[i] != null) {
+				
+				information += wetlands[i].toString() + "\n";
+
+				information += "Species by type: \n" + wetlands[i].calculateSpeciesByType() + "\n";
+			}
+		}
+
+		return information;
+
 	}
-	
+
 	/**
-	 * This method shows the wetland name with the highest number of animals.<br>
-	 * <b>pre:</b> The wetlands array must be initialized.<br>
+	 * This method calculates the largest number of animals in the wetlands.<br>
+	 * @return wetlandMostAnimals String, the name of the wetland with the largest number of animals.<br>
 	 */
-	
-	public void showWetlandMoreAnimals(){
+	public String showWetlandMostAnimals() {
 		
-		//do something
-		
+		int largestNumAnimals = -1;
+		String wetlandMostAnimals = "";
+
+		for(int i = 0; i < wetlands.length; i++) {
+			
+			if(wetlands[i] != null && wetlands[i].animalsNumber() > largestNumAnimals) {
+				wetlandMostAnimals = wetlands[i].getName();
+				largestNumAnimals = wetlands[i].animalsNumber();
+			}
+
+		}
+
+		return wetlandMostAnimals;
+
 	}
-	
+
 }

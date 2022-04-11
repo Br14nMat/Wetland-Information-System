@@ -1,41 +1,34 @@
 package model;
 
 /**
- * This is a class to represent the species that live in the wetland.
+ * This class represents a species in the wetland.
  */
- 
-public class Species{
-	
-	/**
-	 * The species name.
-	 */
-	 
-	private String name;
-	
-	/**
-	 * The scientific name of the species.
-	 */
-	
-	private String scientificName;
-	
-	/**
-	 * The species type.
-	 */
-	
-	private String type;
-	
-	/**
-	 * The species is migratory.
-	 */
+public class Species {
 
-	private boolean isMigratory;
-	
-	
 	/**
-	 * This constructor instantiates an object of the wetland class with the species information.<br>
+	 * This is the name of the species.
 	 */
-	
-	public Species(String name, String scientificName, String type, boolean isMigratory){
+	private String name;
+
+	/**
+	 * This is the scientific name of the species.
+	 */
+	private String scientificName;
+
+	/**
+	 * This atribute indicates wheter the species is migratory or not.
+	 */
+	private boolean isMigratory;
+
+	/**
+	 * This is the type of the species.
+	 */
+	private SpeciesType type;
+
+	/**
+	 * This is the constructor of the Species class.
+	 */
+	public Species(String name, String scientificName, SpeciesType type, boolean isMigratory) {
 		
 		this.name = name;
 		this.scientificName = scientificName;
@@ -44,44 +37,40 @@ public class Species{
 		
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
-	public void setName(String name){
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getScientificName(){
+	public String getScientificName() {
 		return scientificName;
 	}
 
-	public void setScientificName(String scientificName){
+	public void setScientificName(String scientificName) {
 		this.scientificName = scientificName;
 	}
 
-	public String getType(){
-		return type;
-	}
-
-	public void setType(String type){
-		this.type = type;
-	}
-
-	public boolean isMigratory(){
+	public boolean isMigratory() {
 		return isMigratory;
 	}
 
-	public void setMigratory(boolean isMigratory){
+	public void setMigratory(boolean isMigratory) {
 		this.isMigratory = isMigratory;
 	}
-	
-	
-	public String toString(){
-		
-		return "Species [name=" + name + ", scientificName=" + scientificName + ", type=" + type + ", isMigratory=" + isMigratory + "]";
-		
+
+	public SpeciesType getType() {
+		return type;
 	}
 
+	public void setType(SpeciesType type) {
+		this.type = type;
+	}
+
+	public String toString() {
+		return "Species [name=" + name + ", scientificName=" + scientificName + ", type=" + type.toString() + ", isMigratory=" + isMigratory + "]";
+	}
 
 }
