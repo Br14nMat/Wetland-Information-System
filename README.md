@@ -1,6 +1,6 @@
 # Wetland Information System
 
-![Wetland](https://user-images.githubusercontent.com/103274903/163052662-5efb645f-508f-44ed-93b6-2255835b5bb8.jpg)
+![Wetland](https://user-images.githubusercontent.com/103274903/163053010-3d483974-77e8-4a80-9b90-12fb7e3e9f66.jpg)
 
 [Original image](https://dudek.com/rule-revisions-wetlands-wildlife/)
 
